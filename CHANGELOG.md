@@ -1,3 +1,8 @@
+## v0.3.100
+
+* (Custom update) Compile libwebp when installing gem
+* (Custom update) Push to Gemfury
+
 ## v0.2.7
 
 * Fix build for old libwebp versions
