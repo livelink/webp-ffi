@@ -6,6 +6,21 @@ require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'ffi-compiler/compile_task'
 require 'mini_portile2'
+require 'gemfury'
+require 'gemfury/command'
+
+# Override rubygem_push to push to gemfury instead when doing `rake release`
+module Bundler
+  class GemHelper
+    def rubygem_push(path)
+      ::Gemfury::Command::App.start(['push', path, '--as=livelink'])
+    end
+
+    def version_tag
+      "#{name}-#{version}"
+    end
+  end
+end
 
 WEBP = MiniPortile.new('libwebp', '1.2.4')
 WEBP.files = ['https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.4.tar.gz']
